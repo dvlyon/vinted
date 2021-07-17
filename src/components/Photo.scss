@@ -1,0 +1,33 @@
+.Photo {
+  width: 100%;
+}
+
+.Photo img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+	.Photo {
+		width: 50%;
+	}
+}
+
+@media only screen and (min-width: 960px) {
+	.Photo {
+		width: 33.33%;
+	}
+}
+
+@media only screen and (min-width: 1280px) {
+	.Photo {
+		width: 25%;
+	}
+}
+
+@media only screen and (min-width: 1920px) {
+	.Photo {
+		width: 20%;
+	}
+}
