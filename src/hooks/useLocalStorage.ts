@@ -13,7 +13,6 @@ const useLocalStorage = (props: IuseLocalStorage) => {
   const setLocalStorageValue = async (newValue: any) => {
     try {
       await localStorage.setItem(key, JSON.stringify(newValue))
-
     } catch (e) {
       console.error(e)
     }

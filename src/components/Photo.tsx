@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Heart from './Heart'
 import './Photo.scss'
 
@@ -12,6 +12,8 @@ const Photo = (props: IPhoto) => {
   const { photo, isFav, addFav } = props
 
   const [name, setName] = useState(`User ${photo.owner}`)
+
+  const photoRef = useRef<null | HTMLImageElement>(null)
 
   const fetchData = useCallback(async () => {
     await fetch(`https://www.flickr.com/services/rest/?method=flickr.profile.getProfile&api_key=a3a4c4d1713708b3a7eb447250a9ce2a&user_id=${photo.owner}&format=json&nojsoncallback=1`)
@@ -29,6 +31,27 @@ const Photo = (props: IPhoto) => {
     fetchData()
   }, [fetchData])
 
+  const handleObserver = useCallback(entries => {
+    const target = entries[0]
+    if (target.isIntersecting && photoRef.current) {
+      photoRef.current.src = `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`
+    }
+  }, [photo.id, photo.secret, photo.server])
+
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: '20px',
+      threshold: 0,
+    }
+
+    const observer = new IntersectionObserver(handleObserver, options)
+
+    if (photoRef.current) observer.observe(photoRef.current)
+
+    return () => observer.disconnect()
+  }, [handleObserver])
+
   const onFavourite = () => {
     addFav(photo.id)
   }
@@ -37,8 +60,9 @@ const Photo = (props: IPhoto) => {
     <div className='photo-outer'>
       <div className='photo'>
         <img
-          src={`https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_w.jpg`}
-          alt={JSON.stringify(photo)}
+          ref={photoRef}
+          src={`https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_s.jpg`}
+          alt={photo.title}
         />
         {isFav && <Heart />}
         <div className='photo-inner'>

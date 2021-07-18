@@ -1,3 +1,5 @@
+// Base source code from https://loading.io/css/
+
 import './Heart.scss'
 
 const Heart = () => (

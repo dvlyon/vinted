@@ -1,3 +1,7 @@
+// Base source code from https://loading.io/css/
+
+$colour: #FC4E44;
+
 .lds-heart {
   display: inline-block;
   position: absolute;
@@ -15,7 +19,7 @@
   position: absolute;
   width: 16px;
   height: 16px;
-  background: #FC4E44;
+  background: $colour;
   animation: lds-heart 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
@@ -26,7 +30,7 @@
   display: block;
   width: 16px;
   height: 16px;
-  background: #FC4E44;
+  background: $colour;
 }
 
 .lds-heart div:before {
