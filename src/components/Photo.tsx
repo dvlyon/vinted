@@ -11,7 +11,7 @@ interface IPhoto {
 const Photo = (props: IPhoto) => {
   const { photo, isFav, addFav } = props
 
-  const [name, setName] = useState(`User ${photo.owner}`)
+  const [name, setName] = useState(photo.ownername)
 
   const photoRef = useRef<null | HTMLImageElement>(null)
 

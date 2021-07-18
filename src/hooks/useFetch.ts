@@ -8,7 +8,7 @@ const useFetch = (page: number) => {
   const fetchData = useCallback(async () => {
     setLoading(true)
     setError(false)
-    await fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=a3a4c4d1713708b3a7eb447250a9ce2a&page=${page}&format=json&nojsoncallback=1`)
+    await fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=a3a4c4d1713708b3a7eb447250a9ce2a&extras=owner_name&page=${page}&format=json&nojsoncallback=1`)
       .then(res => res.json())
       .then(
         result => {
